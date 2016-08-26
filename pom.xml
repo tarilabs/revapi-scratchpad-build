@@ -4,7 +4,7 @@
 
   <groupId>net.tarilabs.scratchpad</groupId>
   <artifactId>revapi-scratchpad-build</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>jar</packaging>
 
   <name>revapi-scratchpad-build</name>
@@ -35,6 +35,30 @@
               <version>0.10.0</version>
             </dependency>
           </dependencies>
+                  <configuration>
+          <oldArtifacts>
+            <artifact>${project.groupId}:${project.artifactId}:1.0.0</artifact>
+          </oldArtifacts>
+          <newArtifacts>
+            <!-- The special 'BUILD' GAV is used to specify artifacts that were produced during the build of the current project. -->
+            <artifact>BUILD</artifact>
+          </newArtifacts>
+          <analysisConfigurationFiles>
+            <configurationFile>
+              <path>src/build/revapi-config.json</path>
+            </configurationFile>
+          </analysisConfigurationFiles>
+        </configuration>
+                <executions>
+          <execution>
+            <id>check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+          </executions>
+          
         </plugin>
 </plugins>
 </build>
